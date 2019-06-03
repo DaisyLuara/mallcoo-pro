@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "testing": "vue-cli-service build",
+    "build": "vue-cli-service build ",
     "lint": "vue-cli-service lint",
     "test:e2e": "vue-cli-service test:e2e",
     "test:unit": "vue-cli-service test:unit"
@@ -27,6 +28,7 @@
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",
     "vuex": "^3.0.1",
+    "vuex-persistedstate": "^2.5.4",
     "webpack": "^4.32.2",
     "webpack-dev-server": "^3.5.1",
     "webpack-parallel-uglify-plugin": "^1.1.0",

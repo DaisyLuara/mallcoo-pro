@@ -9,9 +9,6 @@ export * from './coupon'
 // 游戏信息
 export * from './game'
 
-// 520钻石相关接口
-export * from './diamond'
-
 // 斌伟h5文档接口
 export * from './h5'
 

@@ -63,30 +63,11 @@
 
 import { $wechat, isInWechat, wechatShareTrack, Cookies } from "@/services";
 import { normalPages } from "@/mixins/normalPages";
-const cdnUrl = 'https://cdn.xingstation.cn'
+const cdnUrl = process.env.VUE_APP_CDN_URL
 import MC from "mcanvas";
 export default {
   mixins: [normalPages],
   props: {
-    // title: {
-    //   type: String,
-    //   required: false,
-    //   default: "幻境奇缘"
-    // },
-    // desc: {
-    //   type: String,
-    //   required: false,
-    //   default: "揭开你的身世之谜！"
-    // },
-    // link: {
-    //   type: String,
-    //   required: true
-    // },
-    // imgUrl: {
-    //   type: String,
-    //   required: false,
-    //   default: cdnUrl + "/fe/marketing/img/dreamland/icon.png"
-    // },
     shareData: {
       type: Object,
       default: [{

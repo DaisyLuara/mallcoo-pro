@@ -10,6 +10,28 @@ let marketingRouter = [
       desc: '幻境'
     },
     isAbandoned: false
+  },
+  {
+    path: 'wys',
+    location: 'wuyue',
+    name: 'wys',
+    meta: {
+      title: '我爱你五月，I ♡ may',
+      author: 'lipan',
+      desc: '吾悦-金币第二期'
+    },
+    isAbandoned: false
+  },
+  {
+    path: 'wys_share',
+    location: 'wuyueShare',
+    name: 'wys_share',
+    meta: {
+      title: '我爱你五月，I ♡ may',
+      author: 'lipan',
+      desc: '吾悦-金币第二期-分享'
+    },
+    isAbandoned: false
   }
 ]
 export default marketingRouter
