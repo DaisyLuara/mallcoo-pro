@@ -30,8 +30,8 @@ const getMallcooOauth = params => {
       })
   })
 }
-// 猫酷注册发券测试
-// 商场会员信息( 查询是否是商场会员)params={z,oid}
+//猫酷注册发券测试
+//商场会员信息( 查询是否是商场会员)params={z,oid}
 const checkMallMember = params => {
   return new Promise((resolve, reject) => {
     axios
@@ -45,7 +45,7 @@ const checkMallMember = params => {
   })
 }
 
-// 发送短信验证码
+//发送短信验证码
 const sendMessageCode = params => {
   return new Promise((resolve, reject) => {
     axios
@@ -58,8 +58,8 @@ const sendMessageCode = params => {
       })
   })
 }
-// 手机号开卡接口
-const getCardByPhone = params => {
+//手机号开卡接口
+const openMallcooMemberByPhone = params => {
   return new Promise((resolve, reject) => {
     axios
       .post(MALLCOO_URL + '/users', params)
@@ -72,4 +72,79 @@ const getCardByPhone = params => {
   })
 }
 
-export { getMallcooOauth, checkMallMember, sendMessageCode, getCardByPhone }
+// 猫酷查询优惠券包
+const getMallcooCouponInfo = params => {
+  return new Promise((resolve, reject) => {
+    axios
+      .get(`${MALLCOO_URL}/couponPacks`, { params })
+      .then(response => {
+        resolve(response.data)
+      })
+      .catch(err => {
+        reject(err)
+      })
+  })
+}
+
+// 猫酷-领取优惠券包
+const receiveMallcooCoupon = params => {
+  return new Promise((resolve, reject) => {
+    axios
+      .post(MALLCOO_URL + '/couponPacks', params, {
+        headers: { 'api-token': apiToken }
+      })
+      .then(response => {
+        resolve(response.data)
+      })
+      .catch(err => {
+        reject(err)
+      })
+  })
+}
+
+// 猫酷-查询优惠券
+const getMallcooUserCoupon = params => {
+  return new Promise((resolve, reject) => {
+    axios
+      .get(
+        MALLCOO_URL + '/user/coupon',
+        { params },
+        {
+          headers: { 'api-token': apiToken }
+        }
+      )
+      .then(response => {
+        resolve(response.data)
+      })
+      .catch(err => {
+        reject(err)
+      })
+  })
+}
+
+// 猫酷-领取优惠券
+const mallcooCoupons = params => {
+  return new Promise((resolve, reject) => {
+    axios
+      .post(MALLCOO_URL + '/coupons', params, {
+        headers: { 'api-token': apiToken }
+      })
+      .then(response => {
+        resolve(response.data)
+      })
+      .catch(err => {
+        reject(err)
+      })
+  })
+}
+
+export {
+  getMallcooOauth,
+  checkMallMember,
+  sendMessageCode,
+  openMallcooMemberByPhone,
+  getMallcooCouponInfo,
+  receiveMallcooCoupon,
+  getMallcooUserCoupon,
+  mallcooCoupons
+}

@@ -14,3 +14,6 @@ export * from './h5'
 
 // 猫酷
 export * from './mallcoo'
+
+// v2版本发券
+export * from './v2'

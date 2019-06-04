@@ -28,13 +28,21 @@ module.exports = {
               comments: false
             },
             compress: {
-              warnings: process.env.NODE_ENV === 'testing',
-              drop_debugger: process.env.NODE_ENV === 'testing',
-              drop_console: process.env.NODE_ENV === 'testing'
+              // warnings: process.env.NODE_ENV === 'testing',
+              // drop_debugger: process.env.NODE_ENV === 'testing',
+              // drop_console: process.env.NODE_ENV === 'testing'
             }
           }
         })
       )
+    }
+  },
+  css: {
+    loaderOptions: {
+      css: {
+        localIdentName: '[name]-[hash]',
+        camelCase: 'only'
+      }
     }
   },
   devServer: {

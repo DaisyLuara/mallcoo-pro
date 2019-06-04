@@ -6,21 +6,10 @@ const OPEN_COUPON = process.env.VUE_APP_AD_API + '/api/open/coupon/'
 const OPEN_USER_COUPON = process.env.VUE_APP_AD_API + '/api/open/user/coupon'
 
 const IMAGE_UPLOAD = process.env.VUE_APP_AD_API + '/api/images'
-
-const MALLCOO_API = process.env.VUE_APP_AD_API + '/api/mallcoo/user/oauth'
-const BATCH_URL = process.env.VUE_APP_AD_API + '/api/open/coupon/batches'
-const PROJECTS_URL = process.env.VUE_APP_AD_API + '/api/open/projects/coupons'
-const MALLCOO_URL = process.env.VUE_APP_AD_API + '/api/mallcoo'
 const REQ_HEADER = {
   headers: {
     'api-token': apiToken,
     'Set-Cookie': 'sign=' + Cookies.get('sign')
-  }
-}
-const V2_HEADER = {
-  headers: {
-    'api-token': apiToken,
-    Accept: 'application/vdn.xingstation.v2+json'
   }
 }
 const handleParma = params => {
