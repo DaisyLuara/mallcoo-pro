@@ -6,6 +6,80 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
     <title>mallcoo-pro</title>
+    <% if (process.env.NODE_ENV === "'production'") { %>
+    <script>
+      ;(function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r
+        ;(i[r] =
+          i[r] ||
+          function() {
+            ;(i[r].q = i[r].q || []).push(arguments)
+          }),
+          (i[r].l = 1 * new Date())
+        ;(a = s.createElement(o)), (m = s.getElementsByTagName(o)[0])
+        a.async = 1
+        a.src = g
+        m.parentNode.insertBefore(a, m)
+      })(
+        window,
+        document,
+        'script',
+        'https://www.google-analytics.com/analytics.js',
+        'ga'
+      )
+      ga('create', 'UA-139875448-1', 'auto')
+      ga('send', 'pageview')
+
+      //Piwik
+      ;(function() {
+        // GrowingIO 统计
+        !(function(e, t, n, g, i) {
+          ;(e[i] =
+            e[i] ||
+            function() {
+              ;(e[i].q = e[i].q || []).push(arguments)
+            }),
+            (n = t.createElement('script')),
+            (tag = t.getElementsByTagName('script')[0]),
+            (n.async = 1),
+            (n.src =
+              ('https:' == document.location.protocol
+                ? 'https://'
+                : 'http://') + g),
+            tag.parentNode.insertBefore(n, tag)
+        })(
+          window,
+          document,
+          'script',
+          'h5-images.oss-cn-shanghai.aliyuncs.com/xingshidu_h5/js/gio.js',
+          'gio'
+        )
+        gio('init', '8fcd22590e2dd3e3', {})
+        //custom page code begin here
+        //custom page code end here
+        gio('send')
+      })()
+    </script>
+    <script type="text/javascript">
+      !(function(e, t, n, g, i) {
+        ;(e[i] =
+          e[i] ||
+          function() {
+            ;(e[i].q = e[i].q || []).push(arguments)
+          }),
+          (n = t.createElement('script')),
+          (tag = t.getElementsByTagName('script')[0]),
+          (n.async = 1),
+          (n.src =
+            ('https:' == document.location.protocol ? 'https://' : 'http://') +
+            g),
+          tag.parentNode.insertBefore(n, tag)
+      })(window, document, 'script', 'assets.growingio.com/gio-wxwv.js', 'gio')
+      // ‘你的appid’为选填项，如果你的微信内嵌页应用有微信分配的appid，建议填写；如果没有，可以留空。
+      gio('init', '8fcd22590e2dd3e3', '', { debug: false })
+      gio('send')
+    </script>
+    <% } %>
   </head>
   <body>
     <noscript>
