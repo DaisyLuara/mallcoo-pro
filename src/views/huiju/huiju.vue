@@ -199,6 +199,7 @@ export default {
       }
       this.onCountDown()
       let params = {
+        type: 'huiju',
         phone: this.phone
       }
       sendMessageCode(params)

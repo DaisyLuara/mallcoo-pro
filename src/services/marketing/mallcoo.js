@@ -47,9 +47,14 @@ const checkMallMember = params => {
 
 // 发送短信验证码
 const sendMessageCode = params => {
+  let url = MALLCOO_URL + '/verificationCodes'
+  if (params.type) {
+    url = MALLCOO_URL + '/' + params.type + '/verificationCodes'
+    delete params.type
+  }
   return new Promise((resolve, reject) => {
     axios
-      .post(MALLCOO_URL + '/verificationCodes', params)
+      .post(url, params)
       .then(response => {
         resolve(response.data)
       })
