@@ -1,22 +1,22 @@
 const getters = {
   z: state => {
-    return state.loginState.z;
+    return state.loginState.z
   },
   loginState: state => {
-    return state.loginState;
+    return state.loginState
   },
   lastBarrageTime: state => {
-    return state.lastBarrageTime;
+    return state.lastBarrageTime
   },
   weixinUrl: state => {
-    return state.weixinUrl;
+    return state.weixinUrl
   },
   avatar: state => {
-    return state.loginState.face;
+    return state.loginState.face
   },
   uid: state => {
-    return state.loginState.uid;
+    return state.loginState.uid
   }
-};
+}
 
-export default getters;
+export default getters

@@ -4,8 +4,8 @@ import {
   isInWechat,
   wechatShareTrack,
   splitParms
-} from '@/services'
-const cdnUrl = process.env.CDN_URL
+} from 'services'
+const cdnUrl = process.env.VUE_APP_CDN_URL
 export const normalPages = {
   data() {
     return {

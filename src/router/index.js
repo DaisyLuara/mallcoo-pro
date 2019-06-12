@@ -1,12 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import marketingHome from '@/views/marketingHome'
+import marketingHome from '../views/marketingHome'
 
 // 被分割的子路由信息
 import marketingRouter from './marketing/index'
-
 // 引用模块
-const _import = require('@/services/utils/import')
+const _import = require('../services/utils/import')
 
 // 过滤掉废弃页面
 const marketingRouterAfterFilter = marketingRouter.filter(e => !e.isAbandoned)

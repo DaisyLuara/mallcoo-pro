@@ -1,5 +1,5 @@
-import { $wechat, isInWechat } from '@/services'
-const cdnUrl = process.env.CDN_URL
+import { $wechat, isInWechat } from 'services'
+const cdnUrl = process.env.VUE_APP_CDN_URL
 export const onlyWechatShare = {
   data() {
     return {

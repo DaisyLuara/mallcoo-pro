@@ -1,9 +1,8 @@
-// 拆分成按照日期排列的路由配置
 let marketingRouter = [
   {
-    path: 'dreamland',
-    location: 'Dreamland',
-    name: 'dreamland',
+    path: 'huiju',
+    location: 'huiju/huiju',
+    name: 'huiju',
     meta: {
       title: '星视度',
       author: 'lipan',
@@ -12,24 +11,13 @@ let marketingRouter = [
     isAbandoned: false
   },
   {
-    path: 'wys',
-    location: 'wuyue',
-    name: 'wys',
+    path: 'huiju_word',
+    location: 'huiju/word1',
+    name: 'huiju_word',
     meta: {
-      title: '我爱你五月，I ♡ may',
+      title: '星视度',
       author: 'lipan',
-      desc: '吾悦-金币第二期'
-    },
-    isAbandoned: false
-  },
-  {
-    path: 'wys_share',
-    location: 'wuyueShare',
-    name: 'wys_share',
-    meta: {
-      title: '我爱你五月，I ♡ may',
-      author: 'lipan',
-      desc: '吾悦-金币第二期-分享'
+      desc: '荟聚用户注册协议'
     },
     isAbandoned: false
   }

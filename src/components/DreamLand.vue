@@ -7,6 +7,7 @@
     <div
       v-if="loadingClick"
       v-show="showImg"
+      :style="style.root"
       class="shade"
       @click="go"
     >
@@ -22,6 +23,7 @@
     <div
       v-else
       v-show="showImg"
+      :style="style.root"
       class="shade"
     >
       <img
@@ -59,27 +61,27 @@
   </div>
 </template>
 <script>
-/* eslint-disable */
-
-import { $wechat, isInWechat, wechatShareTrack, Cookies } from "@/services";
-import { normalPages } from "@/mixins/normalPages";
-const cdnUrl = process.env.VUE_APP_CDN_URL
+const cdnUrl = process.env.VUE_APP_CDN_URL;
 import MC from "mcanvas";
 export default {
-  mixins: [normalPages],
   props: {
-    shareData: {
+    loadingClick: {
+      type: Boolean,
+      required: false,
+      default: true
+    },
+    photo: {
+      type: String,
+      required: true
+    },
+    params: {
       type: Object,
-      default: [{
-        title: '幻境奇缘',
-        desc: '揭开你的身世之谜！',
-        link: window.location.href,
-        imgUrl: cdnUrl + "/fe/marketing/img/dreamland/icon.png"
-      }]
+      required: true
     },
     paths: {
       type: Array,
-      default: [
+      required: false,
+      default: () => [
         {
           scope: 6,
           paths: ["w_1.png", "w_2.png", "w_3.png", "w_4.png", "w_5.png"]
@@ -92,6 +94,7 @@ export default {
     },
     bgData: {
       type: String,
+      required: false,
       default:
         'background-image: url("' +
         cdnUrl +
@@ -101,26 +104,22 @@ export default {
   data () {
     return {
       baseUrl: cdnUrl + "/fe/marketing/img/dreamland/",
-      loadingClick: false,
+      style: {
+        root: {
+          height: this.$innerHeight() + "px"
+        }
+      },
       showImg: true,
       contentShow: false,
       peopleID: null,
       base64Data: null,
-      wxShareInfoValue: {
-        title: this.shareData.title,
-        desc: this.shareData.desc,
-        link: this.shareData.link,
-        imgUrl: this.shareData.imgUrl
-      }
     };
   },
-  watch: {
-    parms () {
-      this.peopleID = this.parms.peopleID;
-      this.drawing();
-    }
+  created () {
+    this.peopleID = this.params.peopleID;
   },
   mounted () {
+    this.drawing();
     if (!this.loadingClick) {
       this.go1();
     }
@@ -244,7 +243,7 @@ img {
   overflow-x: hidden;
   .shade {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     position: relative;
     overflow: hidden;
     background-image: url("@{imageHost}bg2.png");
@@ -267,7 +266,6 @@ img {
     width: 100%;
     position: relative;
     overflow: hidden;
-    // background-image: url("@{imageHost}bg.png");
     background-size: 100% auto;
     background-position: center top;
     background-repeat: no-repeat;

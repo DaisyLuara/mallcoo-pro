@@ -30,8 +30,8 @@ const getMallcooOauth = params => {
       })
   })
 }
-//猫酷注册发券测试
-//商场会员信息( 查询是否是商场会员)params={z,oid}
+// 猫酷注册发券测试
+// 商场会员信息( 查询是否是商场会员)params={z,oid}
 const checkMallMember = params => {
   return new Promise((resolve, reject) => {
     axios
@@ -45,7 +45,7 @@ const checkMallMember = params => {
   })
 }
 
-//发送短信验证码
+// 发送短信验证码
 const sendMessageCode = params => {
   return new Promise((resolve, reject) => {
     axios
@@ -58,7 +58,7 @@ const sendMessageCode = params => {
       })
   })
 }
-//手机号开卡接口
+// 手机号开卡接口
 const openMallcooMemberByPhone = params => {
   return new Promise((resolve, reject) => {
     axios

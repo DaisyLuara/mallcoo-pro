@@ -1,5 +1,5 @@
-import { getInfoById, splitParms } from '@/services'
-const cdnUrl = process.env.CDN_URL
+import { getInfoById, splitParms } from 'services'
+const cdnUrl = process.env.VUE_APP_CDN_URL
 export const onlyGetPhoto = {
   data() {
     return {
