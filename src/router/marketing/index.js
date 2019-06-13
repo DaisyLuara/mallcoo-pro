@@ -4,7 +4,7 @@ let marketingRouter = [
     location: 'huiju/huiju',
     name: 'huiju',
     meta: {
-      title: '星视度',
+      title: '无锡荟聚',
       author: 'lipan',
       desc: '幻境'
     },
@@ -17,7 +17,7 @@ let marketingRouter = [
     meta: {
       title: '星视度',
       author: 'lipan',
-      desc: '荟聚用户注册协议'
+      desc: '星视度用户注册协议'
     },
     isAbandoned: false
   }

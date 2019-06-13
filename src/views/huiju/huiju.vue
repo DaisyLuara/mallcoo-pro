@@ -155,17 +155,17 @@ export default {
     },
     // 微信静默授权
     handleWechatAuth () {
-      if (Cookies.get('sign') === null) {
+      if (this.$route.sign) {
+        this.sign = this.$route.sign
+        this.init()
+      } else {
         let base_url = encodeURIComponent(String(window.location.href))
         let redirct_url =
-          process.env.WX_API +
+          process.env.VUE_APP_AD_API +
           '/wx/officialAccount/oauth?url=' +
           base_url +
           '&scope=snsapi_base'
         window.location.href = redirct_url
-      } else {
-        this.sign = Cookies.get('sign')
-        this.init()
       }
     },
     checkPhone () {
