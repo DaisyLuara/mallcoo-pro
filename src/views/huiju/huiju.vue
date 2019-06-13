@@ -153,8 +153,8 @@ export default {
     },
     // 微信静默授权
     handleWechatAuth () {
-      if (this.$route.sign) {
-        this.sign = this.$route.sign
+      if (this.$route.query.sign) {
+        this.sign = this.$route.query.sign
         this.init()
       } else {
         handleWechatAuth(window.location.href)
