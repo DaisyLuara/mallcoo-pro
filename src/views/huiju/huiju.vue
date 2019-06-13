@@ -78,10 +78,7 @@
 </template>
 <script>
 import {
-  Cookies,
-  $wechat,
   isInWechat,
-  wechatShareTrack,
   getInfoById,
   checkMallMember,
   sendMessageCode,
@@ -90,8 +87,8 @@ import {
   splitParms,
   handleWechatAuth
 } from 'services'
-import { onlyWechatShare } from "mixins/onlyWechatShare"
-import Dreamland from 'components/dreamLand'
+import { onlyWechatShare } from 'mixins/onlyWechatShare'
+import Dreamland from '@/components/dreamLand'
 const CDNURL = process.env.VUE_APP_CDN_URL
 export default {
   components: {
@@ -136,7 +133,7 @@ export default {
     async init () {
       try {
         let { id, code, state } = this.$route.query
-        let { belong, oid, image, parms } = await getInfoById(id, code, state)
+        let { oid, image, parms } = await getInfoById(id, code, state)
         this.oid = oid
         this.photo = image
         this.params = splitParms(parms)
