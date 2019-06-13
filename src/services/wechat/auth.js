@@ -1,7 +1,11 @@
 import { Cookies } from '@/services'
 import axios from 'axios'
 const WX_API = process.env.VUE_APP_WX_API
-
+const V2_HEADER = {
+  headers: {
+    Accept: 'application/vnd.saas.v2+json'
+  }
+}
 const getWxUserInfo = () => {
   let url = WX_API + '/wx/officialAccount/user?v=' + new Date().getTime()
   return new Promise((resolve, reject) => {
@@ -24,16 +28,32 @@ const getWxUserInfo = () => {
   })
 }
 
+// 静默授权
+const handleWechatAuth = url => {
+  let base = encodeURIComponent(String(url))
+  let redirect =
+    WX_API + '/wx/officialAccount/oauth?url=' + base + '&scope=snsapi_base'
+  return new Promise((resolve, reject) => {
+    axios
+      .get(redirect, V2_HEADER)
+      .then(response => {
+        resolve(response.data)
+      })
+      .catch(err => {
+        reject(err)
+      })
+  })
+}
 // 当code state 过期时候需要处理
 const NaviToWechatAuth = customUrl => {
   const appid = 'wx63bd0a98ca1b6251'
-  const redirect_uri = encodeURIComponent(customUrl || window.location.href)
+  const redirectUri = encodeURIComponent(customUrl || window.location.href)
   const state = 'openid'
   const url =
     'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' +
     appid +
-    '&redirect_uri=' +
-    redirect_uri +
+    '&redirectUri=' +
+    redirectUri +
     '&response_type=code&scope=snsapi_base&state=' +
     state +
     '#wechat_redirect'
@@ -42,8 +62,8 @@ const NaviToWechatAuth = customUrl => {
 
 const getUserInfoByCodeAndState = (code, state) => {
   // 0151.H5通行证-我的信息
-  const request_url = `${process.env.VUE_APP_EXE_API}/h5/wxuserinfo/`
-  const request_params = {
+  const requestUrl = `${process.env.VUE_APP_EXE_API}/h5/wxuserinfo/`
+  const requestParams = {
     params: {
       code: code,
       state: state,
@@ -52,7 +72,7 @@ const getUserInfoByCodeAndState = (code, state) => {
   }
   return new Promise((resolve, reject) => {
     axios
-      .get(request_url, request_params)
+      .get(requestUrl, requestParams)
       .then(r => {
         resolve(r)
       })
@@ -62,4 +82,9 @@ const getUserInfoByCodeAndState = (code, state) => {
   })
 }
 
-export { getWxUserInfo, NaviToWechatAuth, getUserInfoByCodeAndState }
+export {
+  getWxUserInfo,
+  handleWechatAuth,
+  NaviToWechatAuth,
+  getUserInfoByCodeAndState
+}
