@@ -64,7 +64,7 @@ export default {
         if (peopleID <= that.paths[i].scope) {
           path =
             that.paths[i].paths[
-            Math.floor(Math.random() * that.paths[i].paths.length)
+              Math.floor(Math.random() * that.paths[i].paths.length)
             ]
           break
         }

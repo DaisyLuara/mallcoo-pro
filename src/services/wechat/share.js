@@ -15,8 +15,7 @@ const share = shareObject => {
     link =
       window.location.href.indexOf('?') > -1
         ? window.location.href + `&share_at=${Date.now()}&utm_term=wechat_share`
-        : window.location.href +
-          `?share_at=${Date.now()}&utm_term=wechat_share`
+        : window.location.href + `?share_at=${Date.now()}&utm_term=wechat_share`
   }
   shareObject.link = link
   // 显示所有功能接口
@@ -48,15 +47,15 @@ const qRCode = scanQrCodeObject => {
   wx.scanQRCode(scanQrCodeObject)
 }
 
-const $wechat = weixin_url => {
+const $wechat = weixinUrl => {
   return new Promise((resolve, reject) => {
     let requestUrl = process.env.VUE_APP_WX_API + '/wx/officialAccount/sign'
     // 仅iOS设备需要传入
     let params = {}
-    if (weixin_url && isiOS) {
+    if (weixinUrl && isiOS) {
       params = {
         params: {
-          weixin_url: encodeURIComponent(weixin_url.split('#')[0])
+          weixinUrl: encodeURIComponent(weixinUrl.split('#')[0])
         }
       }
     }

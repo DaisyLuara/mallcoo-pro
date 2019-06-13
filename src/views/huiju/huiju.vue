@@ -157,12 +157,6 @@ export default {
         this.sign = this.$route.sign
         this.init()
       } else {
-        // let base_url = encodeURIComponent(String(window.location.href))
-        // let redirct_url =
-        //   process.env.VUE_APP_AD_API +
-        //   '/wx/officialAccount/oauth?url=' +
-        //   base_url +
-        //   '&scope=snsapi_base'
         // window.location.href = redirct_url
         handleWechatAuth(window.location.href).then(res => {
           console.log(res)

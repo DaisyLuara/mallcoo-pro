@@ -61,8 +61,8 @@
   </div>
 </template>
 <script>
-const cdnUrl = process.env.VUE_APP_CDN_URL;
-import MC from "mcanvas";
+import MC from 'mcanvas'
+const cdnUrl = process.env.VUE_APP_CDN_URL
 export default {
   props: {
     loadingClick: {
@@ -84,11 +84,11 @@ export default {
       default: () => [
         {
           scope: 6,
-          paths: ["w_1.png", "w_2.png", "w_3.png", "w_4.png", "w_5.png"]
+          paths: ['w_1.png', 'w_2.png', 'w_3.png', 'w_4.png', 'w_5.png']
         },
         {
           scope: 12,
-          paths: ["m_1.png", "m_2.png", "m_3.png", "m_4.png", "m_5.png"]
+          paths: ['m_1.png', 'm_2.png', 'm_3.png', 'm_4.png', 'm_5.png']
         }
       ]
     },
@@ -103,116 +103,110 @@ export default {
   },
   data () {
     return {
-      baseUrl: cdnUrl + "/fe/marketing/img/dreamland/",
+      baseUrl: cdnUrl + '/fe/marketing/img/dreamland/',
       style: {
         root: {
-          height: this.$innerHeight() + "px"
+          height: this.$innerHeight() + 'px'
         }
       },
       showImg: true,
       contentShow: false,
       peopleID: null,
-      base64Data: null,
-    };
+      base64Data: null
+    }
   },
   created () {
-    this.peopleID = this.params.peopleID;
+    this.peopleID = this.params.peopleID
   },
   mounted () {
-    this.drawing();
+    this.drawing()
     if (!this.loadingClick) {
-      this.go1();
+      this.go1()
     }
   },
   methods: {
     go () {
-      this.showImg = false;
-      this.contentShow = true;
+      this.showImg = false
+      this.contentShow = true
     },
     go1 () {
       let timer = setTimeout(() => {
-        this.showImg = false;
-        this.contentShow = true;
-        clearTimeout(timer);
-      }, 3000);
+        this.showImg = false
+        this.contentShow = true
+        clearTimeout(timer)
+      }, 3000)
     },
-    //获取随机数图片
+    // 获取随机数图片
     randomImg (peopleID) {
-      let that = this;
-      let path = "";
+      let that = this
+      let path = ''
       for (let i = 0; i < that.paths.length; i++) {
         if (peopleID <= that.paths[i].scope) {
-          path =
-            that.paths[i].paths[
-            Math.floor(Math.random() * that.paths[i].paths.length)
-            ];
-          break;
+          path = that.paths[i].paths[Math.floor(Math.random() * that.paths[i].paths.length)]
+          break
         }
       }
-      return path;
+      return path
     },
-    //合成图片
+    // 合成图片
     drawing () {
-      let width = this.$innerWidth();
-      let height = (this.$innerWidth() / 1080) * 1800;
-      let that = this;
-      let backgroundColor = "white";
+      let width = this.$innerWidth()
+      let height = (this.$innerWidth() / 1080) * 1800
+      let that = this
+      let backgroundColor = 'white'
       let mc = new MC({
         width,
         height,
         backgroundColor
-      });
-      let url = that.photo + that.$qiniuCompress();
-      let imgUrl = null;
-      imgUrl = that.baseUrl + that.randomImg(that.peopleID);
-      console.log(imgUrl);
-      mc.background(that.baseUrl + "bg4.png", {
+      })
+      let url = that.photo + that.$qiniuCompress()
+      let imgUrl = null
+      imgUrl = that.baseUrl + that.randomImg(that.peopleID)
+      console.log(imgUrl)
+      mc.background(that.baseUrl + 'bg4.png', {
         left: 0,
         top: 0,
-        type: "origin",
+        type: 'origin',
         width: that.$innerWidth() * 0.9,
         pos: {
-          x: "0%",
-          y: "10%"
+          x: '0%',
+          y: '10%'
         }
       })
         .add(url, {
-          width: "78%",
+          width: '78%',
           pos: {
-            x: "15%",
-            y: "15%"
+            x: '15%',
+            y: '15%'
           }
         })
         .add(imgUrl, {
-          width: "100%",
-          color: "#000000",
+          width: '100%',
+          color: '#000000',
           pos: {
-            x: "0%",
-            y: "0%"
+            x: '0%',
+            y: '0%'
           }
         })
         .draw({
           // 导出图片格式： png/jpg/jpeg/webp;
           // default : png;
-          type: "png",
+          type: 'png',
           //  图片质量，对 png 格式无效； 0~1；
           // default: .9;
           quality: 1,
           // 成功回调；
           success (b64) {
-            that.base64Data = b64;
-            let url = canvas.toDataURL("image/png");
-            let img = document.getElementById("test");
-            img.src = url;
+            that.base64Data = b64
           },
           // 错误回调；
           error (err) {
-            console.log(err);
+            console.log(err)
           }
-        });
+        })
     }
   }
-};
+}
 </script>
 
 <style lang="less" scoped>
