@@ -88,7 +88,7 @@ import {
   handleWechatAuth
 } from 'services'
 import { onlyWechatShare } from 'mixins/onlyWechatShare'
-import Dreamland from '@/components/dreamLand'
+import Dreamland from 'components/DreamLand'
 const CDNURL = process.env.VUE_APP_CDN_URL
 export default {
   components: {
