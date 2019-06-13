@@ -35,6 +35,21 @@ const handleWechatAuth = (url, headers = 'v2') => {
     '&scope=snsapi_base'
   window.location.href = redirect
 }
+const handleWechatAuthBySign = (context, fn, url) => {
+  if (Cookies.get('sign')) {
+    context.sign = Cookies.get('sign')
+    fn()
+    return
+  }
+  if (context.$route.query.sign) {
+    context.sign = context.$route.query.sign
+    Cookies.set('sign', context.$route.query.sign)
+    fn()
+    return
+  }
+  handleWechatAuth(url)
+}
+
 // 当code state 过期时候需要处理
 const NaviToWechatAuth = customUrl => {
   const appid = 'wx63bd0a98ca1b6251'
@@ -76,6 +91,7 @@ const getUserInfoByCodeAndState = (code, state) => {
 export {
   getWxUserInfo,
   handleWechatAuth,
+  handleWechatAuthBySign,
   NaviToWechatAuth,
   getUserInfoByCodeAndState
 }
