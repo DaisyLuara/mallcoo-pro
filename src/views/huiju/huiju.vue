@@ -85,7 +85,7 @@ import {
   openMallcooMemberByPhone,
   validatePhone,
   splitParms,
-  handleWechatAuth
+  handleWechatAuthBySign
 } from 'services'
 import { onlyWechatShare } from 'mixins/onlyWechatShare'
 import Dreamland from 'components/DreamLand'
@@ -125,12 +125,13 @@ export default {
         process.env.NODE_ENV === 'production' ||
         process.env.NODE_ENV === 'testing'
       ) {
-        this.handleWechatAuth()
+        this.handleWechatAuthBySign()
       }
     }
   },
   methods: {
     async init () {
+      console.log('init')
       try {
         let { id, code, state } = this.$route.query
         let { oid, image, parms } = await getInfoById(id, code, state)
@@ -152,13 +153,19 @@ export default {
       }
     },
     // 微信静默授权
-    handleWechatAuth () {
-      if (this.$route.query.sign) {
-        this.sign = this.$route.query.sign
-        this.init()
-      } else {
-        handleWechatAuth(window.location.href)
-      }
+    handleWechatAuthBySign () {
+      // if (Cookies.get('sign')) {
+      //   this.sign = Cookies.get('sign')
+      //   this.init()
+      //   return
+      // }
+      // if (this.$route.query.sign) {
+      //   this.sign = this.$route.query.sign
+      //   Cookies.set('sign', this.$route.query.sign)
+      //   this.init()
+      //   return
+      // }
+      handleWechatAuthBySign(this, this.init, window.location.href)
     },
     checkPhone () {
       if (!this.phone || !validatePhone(this.phone)) {
