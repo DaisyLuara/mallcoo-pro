@@ -85,7 +85,6 @@ import {
   openMallcooMemberByPhone,
   validatePhone,
   splitParms,
-  Cookies,
   handleWechatAuthBySign
 } from 'services'
 import { onlyWechatShare } from 'mixins/onlyWechatShare'
