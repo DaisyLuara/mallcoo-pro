@@ -120,14 +120,15 @@ export default {
   },
   mounted () {
     // 微信授权
-    if (isInWechat() === true) {
-      if (
-        process.env.NODE_ENV === 'production' ||
-        process.env.NODE_ENV === 'testing'
-      ) {
-        this.handleWechatAuth()
-      }
-    }
+    // if (isInWechat() === true) {
+    //   if (
+    //     process.env.NODE_ENV === 'production' ||
+    //     process.env.NODE_ENV === 'testing'
+    //   ) {
+    //     this.handleWechatAuth()
+    //   }
+    // }
+    this.handleWechatAuth()
   },
   methods: {
     async init () {
@@ -157,12 +158,7 @@ export default {
         this.sign = this.$route.sign
         this.init()
       } else {
-        // window.location.href = redirct_url
-        handleWechatAuth(window.location.href).then(res => {
-          console.log(res)
-        }).catch(err => {
-          console.log(err)
-        })
+        handleWechatAuth(window.location.href)
       }
     },
     checkPhone () {
