@@ -241,7 +241,6 @@ export default {
         agree: confirm ? '已同意' : '拒绝'
 
       }
-      console.log(PARSEURL + 'huiju_kaika')
       parseService
         .post(PARSEURL + 'huiju_kaika', parms)
         .then(res => {
