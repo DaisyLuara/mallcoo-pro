@@ -42,6 +42,18 @@ const handleWechatAuth = (url, headers = 'v2') => {
     '&scope=snsapi_base'
   window.location.href = redirect
 }
+const getUserData = (code, state) => {
+  return new Promise((resolve, reject) => {
+    axios
+      .get(GET_USER_DATA_URL, V2_HEADER)
+      .then(response => {
+        resolve(response.data)
+      })
+      .catch(err => {
+        reject(err)
+      })
+  })
+}
 const handleWechatAuthBySign = (context, fn, url) => {
   if (Cookies.get('sign')) {
     context.sign = Cookies.get('sign')
@@ -62,18 +74,6 @@ const handleWechatAuthBySign = (context, fn, url) => {
     return
   }
   handleWechatAuth(url)
-}
-const getUserData = (code, state) => {
-  return new Promise((resolve, reject) => {
-    axios
-      .get(GET_USER_DATA_URL, V2_HEADER)
-      .then(response => {
-        resolve(response.data)
-      })
-      .catch(err => {
-        reject(err)
-      })
-  })
 }
 
 // 当code state 过期时候需要处理
