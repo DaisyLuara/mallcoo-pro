@@ -87,14 +87,12 @@ import {
   splitParms,
   handleWechatAuthBySign
 } from 'services'
-import { onlyWechatShare } from 'mixins/onlyWechatShare'
 import Dreamland from 'components/DreamLand'
 const CDNURL = process.env.VUE_APP_CDN_URL
 export default {
   components: {
     Dreamland
   },
-  mixins: [onlyWechatShare],
   data () {
     return {
       base: CDNURL + '/fe/image/kaika/',
@@ -109,13 +107,7 @@ export default {
       time: 60,
       vcodeText: '点击获取',
       verification_key: '',
-      huiju_doc: 'http://papi.xingstation.com/api/s/ymw',
-      wxShareInfoValue: {
-        title: '你的前世人设竟然是.......',
-        desc: '速戳揭开你的专属身世',
-        link: window.location.href,
-        imgUrl: CDNURL + '/fe/marketing/img/dreamland/icon.png'
-      }
+      huiju_doc: 'http://papi.xingstation.com/api/s/ymw'
     }
   },
   mounted () {
@@ -131,7 +123,6 @@ export default {
   },
   methods: {
     async init () {
-      console.log('init')
       try {
         let { id, code, state } = this.$route.query
         let { oid, image, parms } = await getInfoById(id, code, state)
