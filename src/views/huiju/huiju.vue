@@ -1,13 +1,13 @@
 <template>
   <div class="warp">
     <Dreamland
-      v-if="photo"
+      v-if="photo&&isMember"
       :photo="photo"
       :params="params"
       class="main"
     />
     <div
-      v-show="!isMember"
+      v-show="register"
       class="mask"
     >
       <div
@@ -85,10 +85,12 @@ import {
   openMallcooMemberByPhone,
   validatePhone,
   splitParms,
-  handleWechatAuthBySign
+  handleWechatAuthBySign,
+  parseService
 } from 'services'
 import Dreamland from 'components/DreamLand'
 const CDNURL = process.env.VUE_APP_CDN_URL
+const PARSEURL = process.env.VUE_APP_PARSE_SERVER + '/parse/classes/'
 export default {
   components: {
     Dreamland
@@ -97,8 +99,10 @@ export default {
     return {
       base: CDNURL + '/fe/image/kaika/',
       oid: null,
+      belong: null,
       sign: '',
       isMember: false, // false
+      register: false, // false
       doc: true,
       phone: '',
       photo: null,
@@ -125,8 +129,9 @@ export default {
     async init () {
       try {
         let { id, code, state } = this.$route.query
-        let { oid, image, parms } = await getInfoById(id, code, state)
+        let { belong, oid, image, parms } = await getInfoById(id, code, state)
         this.oid = oid
+        this.belong = belong
         this.photo = image
         this.params = splitParms(parms)
         const getMallcooUserArgs = {
@@ -134,9 +139,8 @@ export default {
           oid: this.oid
         }
         const getMallcooUserResult = await checkMallMember(getMallcooUserArgs)
-        if (getMallcooUserResult) {
-          this.isMember = true
-        }
+        getMallcooUserResult
+          ? this.isMember = true : this.register = true
       } catch (err) {
         if (err.response) {
           alert(err.response.data.message)
@@ -145,17 +149,6 @@ export default {
     },
     // 微信静默授权
     handleWechatAuthBySign () {
-      // if (Cookies.get('sign')) {
-      //   this.sign = Cookies.get('sign')
-      //   this.init()
-      //   return
-      // }
-      // if (this.$route.query.sign) {
-      //   this.sign = this.$route.query.sign
-      //   Cookies.set('sign', this.$route.query.sign)
-      //   this.init()
-      //   return
-      // }
       handleWechatAuthBySign(this, this.init, window.location.href)
     },
     checkPhone () {
@@ -223,6 +216,7 @@ export default {
       openMallcooMemberByPhone(params)
         .then(res => {
           this.isMember = true
+          this.register = false
         })
         .catch(err => {
           alert(err.response.data.message)
@@ -235,7 +229,27 @@ export default {
     },
     confirmDoc (confirm) {
       this.doc = false
-      confirm ? console.log('已同意') : console.log('拒绝')
+      this.saveAgreeData(confirm)
+    },
+    saveAgreeData (confirm) {
+      let parms = {
+        qiniu_id: this.$route.query.id,
+        createTime: new Date().getTime(),
+        sign: this.sign,
+        belong: this.belong,
+        agreement: confirm,
+        agree: confirm ? '已同意' : '拒绝'
+
+      }
+      console.log(PARSEURL + 'huiju_kaika')
+      parseService
+        .post(PARSEURL + 'huiju_kaika', parms)
+        .then(res => {
+          console.log('保存成功')
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   }
 }

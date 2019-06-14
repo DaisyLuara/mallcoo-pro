@@ -2,15 +2,15 @@ import axios from 'axios'
 
 const REQ_HEADER = {
   headers: {
-    'X-Parse-Application-Id': 'jingfree_android',
-    'X-Parse-Master-Key': 'aa9YOWvTxxCY2RXT',
+    'X-Parse-Application-Id': 'jingfree_web',
+    'X-Parse-Master-Key': '6aXXk4Oask7rFTLM',
     'Content-Type': 'application/json',
     Accept: 'application/json'
   }
 }
 
 const parseService = {
-  get (query) {
+  get(query) {
     let promise = new Promise((resolve, reject) => {
       axios
         .get(query, REQ_HEADER)
@@ -28,7 +28,7 @@ const parseService = {
     return promise
   },
 
-  put (query, data) {
+  put(query, data) {
     let promise = new Promise((resolve, reject) => {
       axios
         .put(query, data, REQ_HEADER)
@@ -42,7 +42,7 @@ const parseService = {
     return promise
   },
 
-  post (url, data) {
+  post(url, data) {
     let promise = new Promise((resolve, reject) => {
       axios
         .post(url, data, REQ_HEADER)
