@@ -1,6 +1,13 @@
 import { Cookies } from '@/services'
 import axios from 'axios'
 const WX_API = process.env.VUE_APP_WX_API
+const WX_USER_API = process.env.VUE_APP_WX_USER_API
+const GET_USER_DATA_URL = WX_USER_API + '/wx/officialAccount/user'
+const V2_HEADER = {
+  headers: {
+    Accept: 'application/vnd.saas.v2+json'
+  }
+}
 const getWxUserInfo = () => {
   let url = WX_API + '/wx/officialAccount/user?v=' + new Date().getTime()
   return new Promise((resolve, reject) => {
@@ -35,16 +42,35 @@ const handleWechatAuth = (url, headers = 'v2') => {
     '&scope=snsapi_base'
   window.location.href = redirect
 }
+const getUserData = (code, state) => {
+  return new Promise((resolve, reject) => {
+    axios
+      .get(GET_USER_DATA_URL, V2_HEADER)
+      .then(response => {
+        resolve(response.data)
+      })
+      .catch(err => {
+        reject(err)
+      })
+  })
+}
 const handleWechatAuthBySign = (context, fn, url) => {
   if (Cookies.get('sign')) {
     context.sign = Cookies.get('sign')
     fn()
     return
   }
-  if (context.$route.query.sign) {
-    context.sign = context.$route.query.sign
-    Cookies.set('sign', context.$route.query.sign)
-    fn()
+  let [code, state] = [context.$route.query.code, context.$route.query.state]
+  if (code && state) {
+    getUserData(code, state)
+      .then(res => {
+        context.sign = res.sign
+        Cookies.set('sign', res.sign)
+        fn()
+      })
+      .catch(err => {
+        if (err.response.status === 401) handleWechatAuth(url)
+      })
     return
   }
   handleWechatAuth(url)
@@ -93,5 +119,6 @@ export {
   handleWechatAuth,
   handleWechatAuthBySign,
   NaviToWechatAuth,
-  getUserInfoByCodeAndState
+  getUserInfoByCodeAndState,
+  getUserData
 }
