@@ -7,7 +7,6 @@
     <div
       v-if="loadingClick"
       v-show="showImg"
-      :style="style.root"
       class="shade"
       @click="go"
     >
@@ -23,7 +22,6 @@
     <div
       v-else
       v-show="showImg"
-      :style="style.root"
       class="shade"
     >
       <img
@@ -104,11 +102,6 @@ export default {
   data () {
     return {
       baseUrl: cdnUrl + '/fe/marketing/img/dreamland/',
-      style: {
-        root: {
-          height: this.$innerHeight() + 'px'
-        }
-      },
       showImg: true,
       contentShow: false,
       peopleID: null,
@@ -232,12 +225,16 @@ img {
 }
 .root {
   width: 100%;
+  height: 100vh;
   text-align: center;
   position: relative;
   overflow-x: hidden;
+  background-size: 100% auto;
+  background-position: center top;
+  background-repeat: no-repeat;
   .shade {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     position: relative;
     overflow: hidden;
     background-image: url("@{imageHost}bg2.png");
