@@ -31,21 +31,23 @@ const getWxUserInfo = () => {
 }
 
 // 静默授权
-const handleWechatAuth = (url, headers = 'v2') => {
+const handleWechatAuth = (url, headers = 'v2', scope = 'snsapi_base') => {
   let base = encodeURIComponent(String(url))
+  headers = headers === 0 ? '' : '/' + headers
   let redirect =
     WX_API +
-    '/' +
     headers +
     '/wx/officialAccount/oauth?url=' +
     base +
-    '&scope=snsapi_base'
-  window.location.href = redirect
+    '&scope=' +
+    scope
+  console.log(redirect)
+  // window.location.href = redirect
 }
-const getUserData = (code, state) => {
+const getUserData = (code, state, scope = 'snsapi_base') => {
   return new Promise((resolve, reject) => {
     axios
-      .get(GET_USER_DATA_URL, V2_HEADER)
+      .get(GET_USER_DATA_URL + '?scope=' + scope, V2_HEADER)
       .then(response => {
         resolve(response.data)
       })
@@ -54,7 +56,7 @@ const getUserData = (code, state) => {
       })
   })
 }
-const handleWechatAuthBySign = (context, fn, url) => {
+const handleWechatAuthBySign = (context, fn, url, headers, scope) => {
   if (Cookies.get('sign')) {
     context.sign = Cookies.get('sign')
     fn()
@@ -73,7 +75,7 @@ const handleWechatAuthBySign = (context, fn, url) => {
       })
     return
   }
-  handleWechatAuth(url)
+  handleWechatAuth(url, headers, scope)
 }
 
 // 当code state 过期时候需要处理
