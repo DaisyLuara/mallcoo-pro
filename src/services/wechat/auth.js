@@ -68,17 +68,17 @@ const handleWechatAuthBySign = (context, fn, url, headers, scope) => {
     fn()
     return
   }
-  let [code, state] = [context.$route.query.code, context.$route.query.state]
+  let { code, state } = context.$route.query
   if (code && state) {
     getUserData(code, state)
       .then(res => {
-        context.sign = res.sign
-        Cookies.set('sign', res.sign)
+        context.sign = res.data.sign
+        Cookies.set('sign', res.data.sign)
         fn()
       })
       .catch(err => {
-        // if (err.response.status === 401) handleWechatAuth(url)
         console.log(err)
+        if (err.response.status === 401) handleWechatAuth(url)
       })
   } else {
     handleWechatAuth(url, headers, scope)
