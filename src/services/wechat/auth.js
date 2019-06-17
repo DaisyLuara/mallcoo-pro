@@ -73,9 +73,9 @@ const handleWechatAuthBySign = (context, fn, url, headers, scope) => {
         // if (err.response.status === 401) handleWechatAuth(url)
         console.log(err)
       })
-    return
+  } else {
+    handleWechatAuth(url, headers, scope)
   }
-  handleWechatAuth(url, headers, scope)
 }
 
 // 当code state 过期时候需要处理
