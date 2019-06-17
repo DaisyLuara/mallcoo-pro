@@ -116,14 +116,15 @@ export default {
   },
   mounted () {
     // 微信授权
-    if (isInWechat() === true) {
-      if (
-        process.env.NODE_ENV === 'production' ||
-        process.env.NODE_ENV === 'testing'
-      ) {
-        this.handleWechatAuthBySign()
-      }
-    }
+    // if (isInWechat() === true) {
+    //   if (
+    //     process.env.NODE_ENV === 'production' ||
+    //     process.env.NODE_ENV === 'testing'
+    //   ) {
+    //     this.handleWechatAuthBySign()
+    //   }
+    // }
+    this.handleWechatAuthBySign()
   },
   methods: {
     async init () {
