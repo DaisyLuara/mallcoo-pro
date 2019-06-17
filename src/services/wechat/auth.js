@@ -41,8 +41,7 @@ const handleWechatAuth = (url, headers = 'v2', scope = 'snsapi_base') => {
     base +
     '&scope=' +
     scope
-  console.log(redirect)
-  // window.location.href = redirect
+  window.location.href = redirect
 }
 const getUserData = (code, state, scope = 'snsapi_base') => {
   return new Promise((resolve, reject) => {
