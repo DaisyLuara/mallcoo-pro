@@ -124,7 +124,6 @@ export default {
         this.handleWechatAuthBySign()
       }
     }
-    // this.handleWechatAuthBySign()
   },
   methods: {
     async init () {
