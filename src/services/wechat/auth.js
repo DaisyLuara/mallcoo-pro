@@ -1,7 +1,7 @@
 import { Cookies } from '@/services'
 import axios from 'axios'
 const WX_API = process.env.VUE_APP_WX_API
-const WX_USER_API = process.env.VUE_APP_WX_USER_API
+const WX_USER_API = process.env.VUE_APP_SAAS_API
 const GET_USER_DATA_URL = WX_USER_API + '/wx/officialAccount/user'
 const V2_HEADER = {
   headers: {
