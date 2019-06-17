@@ -70,7 +70,8 @@ const handleWechatAuthBySign = (context, fn, url, headers, scope) => {
         fn()
       })
       .catch(err => {
-        if (err.response.status === 401) handleWechatAuth(url)
+        // if (err.response.status === 401) handleWechatAuth(url)
+        console.log(err)
       })
     return
   }
