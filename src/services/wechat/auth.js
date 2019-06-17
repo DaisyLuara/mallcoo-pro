@@ -44,9 +44,16 @@ const handleWechatAuth = (url, headers = 'v2', scope = 'snsapi_base') => {
   window.location.href = redirect
 }
 const getUserData = (code, state, scope = 'snsapi_base') => {
+  let params = {
+    code,
+    state
+  }
   return new Promise((resolve, reject) => {
     axios
-      .get(GET_USER_DATA_URL + '?scope=' + scope, V2_HEADER)
+      .get(GET_USER_DATA_URL + '?scope=' + scope, {
+        params,
+        headers: V2_HEADER.headers
+      })
       .then(response => {
         resolve(response.data)
       })
