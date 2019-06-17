@@ -211,7 +211,8 @@ export default {
         verification_key: this.verification_key,
         verification_code: this.vcode,
         oid: this.oid,
-        sign: this.sign
+        sign: this.sign,
+        qiniu_id: this.$route.query.id,
       }
       openMallcooMemberByPhone(params)
         .then(res => {
