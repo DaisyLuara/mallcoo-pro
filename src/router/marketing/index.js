@@ -22,9 +22,9 @@ let marketingRouter = [
     isAbandoned: false
   },
   {
-    path: 'wuxi',
-    location: 'wuxi/wuxi',
-    name: 'wuxi',
+    path: 'pig',
+    location: 'pig/pig',
+    name: 'pig',
     meta: {
       title: '无锡荟聚',
       author: 'lipan',
@@ -33,9 +33,9 @@ let marketingRouter = [
     isAbandoned: false
   },
   {
-    path: 'wuxi_word',
-    location: 'wuxi/word',
-    name: 'wuxi_word',
+    path: 'pig_word',
+    location: 'pig/word',
+    name: 'pig_word',
     meta: {
       title: '星视度',
       author: 'lipan',

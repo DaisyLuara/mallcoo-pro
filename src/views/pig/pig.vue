@@ -1,11 +1,18 @@
 <template>
   <div class="warp">
-    <Dreamland
-      v-if="photo&&isMember"
-      :photo="photo"
-      :params="params"
-      class="main"
-    />
+    <div
+      v-if="photo"
+      class="pig"
+    >
+      <img
+        :src="pig +'bg.png'"
+        class="bg"
+      >
+      <img
+        :src="photo"
+        class="photo"
+      >
+    </div>
     <div
       v-show="register"
       class="mask"
@@ -15,7 +22,7 @@
         class="form"
       >
         <img
-          :src="base + 'regbg.png'"
+          :src="base + 'pigbg.png'"
           class="bg"
         >
         <input
@@ -43,7 +50,6 @@
           class="confirm"
           @click="doRegister"
         >
-          <img :src="base + 'confirm.png'">
         </a>
       </div>
       <div
@@ -88,16 +94,13 @@ import {
   handleWechatAuthBySign,
   parseService
 } from 'services'
-import Dreamland from 'components/DreamLand'
 const CDNURL = process.env.VUE_APP_CDN_URL
 const PARSEURL = process.env.VUE_APP_PARSE_SERVER + '/parse/classes/'
 export default {
-  components: {
-    Dreamland
-  },
   data() {
     return {
       base: CDNURL + '/fe/image/kaika/',
+      pig: CDNURL + '/fe/image/yun/',
       oid: null,
       belong: null,
       sign: '',
@@ -225,7 +228,7 @@ export default {
     },
     getLookDocXing() {
       this.$router.push({
-        path: 'wuxi_word'
+        path: 'pig_word'
       })
     },
     confirmDoc(confirm) {
@@ -243,7 +246,7 @@ export default {
 
       }
       parseService
-        .post(PARSEURL + 'huiju_kaika', parms)
+        .post(PARSEURL + 'pig_kaika', parms)
         .then(res => {
           console.log('保存成功')
         })
@@ -290,28 +293,44 @@ a {
   position: relative;
   text-align: center;
   max-width: 750px;
-  .main {
-    position: relative;
+  background-color: #ffde1d;
+  .pig {
     width: 100%;
+    position: relative;
     z-index: 0;
-    overflow-x: hidden;
+    overflow: hidden;
+    .bg {
+      position: relative;
+      z-index: 0;
+    }
+    .photo {
+      width: 57.5%;
+      position: absolute;
+      top: 32.6%;
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: auto;
+      user-select: auto;
+      z-index: 999;
+    }
   }
   .mask {
     width: 100vw;
-    height: 100vh;
+    // height: 100vh;
+    height: 100%;
     position: absolute;
     top: 0%;
+    bottom: 0%;
     left: 0%;
+    right: 0%;
     overflow: hidden;
     z-index: 99;
-    background-image: url("@{img}back.png");
-    background-position: center top;
-    background-size: 100% auto;
-    background-repeat: no-repeat;
+    background-color: rgba(0, 0, 0, 0.7);
     .form {
-      width: 100%;
+      width: 75%;
       position: relative;
       z-index: 0;
+      margin-top: 25%;
       input {
         background: transparent;
         .center;
@@ -324,32 +343,33 @@ a {
       }
       .phone {
         position: absolute;
-        top: 43%;
-        left: 58%;
-        width: 33%;
+        top: 30%;
+        left: 60%;
+        width: 40%;
       }
       .vertify {
         position: absolute;
         left: 46%;
-        top: 51.5%;
-        width: 15%;
+        top: 43.5%;
+        width: 22%;
       }
       .vertify-text {
         position: absolute;
-        right: 27%;
-        top: 51.5%;
-        width: 15%;
-        height: 9vw;
-        line-height: 9vw;
+        right: 14%;
+        top: 45%;
+        width: 17%;
+        height: 5.5vw;
+        line-height: 5.5vw;
         text-align: center;
         color: #956d5b;
-        font-size: 12px;
+        font-size: 10px;
         z-index: 99;
       }
       .confirm {
-        width: 33%;
+        width: 56%;
+        height: 11vw;
         .center;
-        bottom: 20%;
+        bottom: 7.5%;
         z-index: 99;
       }
     }
@@ -360,7 +380,6 @@ a {
       top: 0%;
       left: 0%;
       z-index: 99;
-      background-color: rgba(0, 0, 0, 0.7);
       .word {
         width: 85.5%;
         position: relative;
