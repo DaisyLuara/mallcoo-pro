@@ -95,7 +95,7 @@ export default {
   components: {
     Dreamland
   },
-  data () {
+  data() {
     return {
       base: CDNURL + '/fe/image/kaika/',
       oid: null,
@@ -114,7 +114,7 @@ export default {
       huiju_doc: 'http://papi.xingstation.com/api/s/ymw'
     }
   },
-  mounted () {
+  mounted() {
     // 微信授权
     if (isInWechat() === true) {
       if (
@@ -126,7 +126,7 @@ export default {
     }
   },
   methods: {
-    async init () {
+    async init() {
       try {
         let { id, code, state } = this.$route.query
         let { belong, oid, image, parms } = await getInfoById(id, code, state)
@@ -148,15 +148,15 @@ export default {
       }
     },
     // 微信静默授权
-    handleWechatAuthBySign () {
+    handleWechatAuthBySign() {
       handleWechatAuthBySign(this, this.init, window.location.href)
     },
-    checkPhone () {
+    checkPhone() {
       if (!this.phone || !validatePhone(this.phone)) {
         alert('手机格式不正确，请重新输入')
       }
     },
-    onCountDown () {
+    onCountDown() {
       let timer = setInterval(() => {
         if (this.time === 0) {
           clearInterval(timer)
@@ -168,7 +168,7 @@ export default {
         }
       }, 1000)
     },
-    onGetVcode () {
+    onGetVcode() {
       if (this.vcodeText !== '点击获取') {
         return
       }
@@ -194,7 +194,7 @@ export default {
           this.vcodeText = '点击获取'
         })
     },
-    doRegister () {
+    doRegister() {
       if (!this.phone) {
         alert('请输入手机号码')
         return
@@ -223,16 +223,16 @@ export default {
           alert(err.response.data.message)
         })
     },
-    getLookDocXing () {
+    getLookDocXing() {
       this.$router.push({
-        path: 'huiju_word'
+        path: 'wuxi_word'
       })
     },
-    confirmDoc (confirm) {
+    confirmDoc(confirm) {
       this.doc = false
       this.saveAgreeData(confirm)
     },
-    saveAgreeData (confirm) {
+    saveAgreeData(confirm) {
       let parms = {
         qiniu_id: this.$route.query.id,
         createTime: new Date().getTime(),
